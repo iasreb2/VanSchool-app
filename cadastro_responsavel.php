@@ -1,4 +1,19 @@
-<?php session_start(); ?>
+<?php 
+include 'conexao.php';
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){//SERVER faz o requisito para utilizar POST(formulário html). Os 3 iguais significam idêntico. 
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+    $senha = $_POST['senha'];
+
+    $stmt = $pdo->prepare('INSERT INTO responsaveis (nome, email, telefone, senha) VALUES(?,?,?,?,?)');
+    $stmt->execute([$nome, $email, $telefone, $senha]);
+
+    header('Location: index.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -92,7 +107,6 @@
     <h2>Cadastro do Responsável</h2>
     <form action="salvar_motorista.php" method="POST">
       <input type="text" name="nome" placeholder="Nome Completo" required>
-      <input type="text" name="cpf" placeholder="CPF" required>
       <input type="text" name="telefone" placeholder="Telefone" required>
       <input type="email" name="email" placeholder="Email" required>
       <input type="password" name="senha" placeholder="Senha" required>

@@ -5,9 +5,10 @@ CREATE TABLE responsaveis (
     email VARCHAR(100) UNIQUE,
     telefone VARCHAR(20),
     senha VARCHAR(255),
-    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP --preenche automaticamente
 );
 
+-
 -- Tabela de Alunos
 CREATE TABLE alunos (
     id INT AUTO_INCREMENT PRIMARY KEY,

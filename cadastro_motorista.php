@@ -1,4 +1,28 @@
-<?php session_start(); ?>
+<?php 
+include 'conexao.php';
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){//SERVER faz o requisito para utilizar POST(formulário html). Os 3 iguais significam idêntico. 
+    $nome_aluno = $_POST['nome_aluno'];
+    $data_nascimento = $_POST['data_nascimento'];
+    $endereco_embarque = $_POST['endereco_embarque'];
+    $endereco_desembarque = $_POST['endereco_desembarque'];
+    $observacoes = $_POST['observacoes'];
+
+    $foto_aluno = '';//valor vazio pois o usuário que cadastra
+    if(isset($_FILES['foto_aluno']) && $_FILES['foto_aluno']['error'] === UPLOAD_ERR_OK) {//isset verifica se o file de imagem não é nulo e não tem erro, se tudo isso acontecer, o arquivo é idêntico a UPLOAD_ERR_OK, algo que inidica que foi sucesso.
+        $ext = pathinfo($_FILES['fotos']['name'], PATHINFO_EXTENSION);//pathinfo são as informações de caminho, mas também TODAS as informações do arquivo. O EXTENSION reconhece o tipo de arquivo, png, jpg etc
+        $foto = uniqid() . '.' . $ext;//gera nome da foto conforme data e hora.
+        move_uploaded_file($_FILES['fotos']['tmp_name'], 'uploads/'. $foto);//move arquivos para uma pasta temporária, para que não haja sobrecarga no servidor
+    }
+
+    $stmt = $pdo->prepare('INSERT INTO alunos (nome_aluno, data_nascimento, endereco_embarque, endereco_desembarque,observacoes, foto_aluno) VALUES(?,?,?,?,?)');
+    $stmt->execute([$titulo, $autor, $genero, $ano_publicacao, $foto]);
+
+    header('Location: index.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
