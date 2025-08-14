@@ -1,9 +1,9 @@
 <?php
 // Variáveis de conexão
-$servidor = 'localhost';
-$banco = 'biblioteca_iasminr';
-$usuario = 'root';
-$senha = '';
+$servidor = 'ftp://45.152.44.175';
+$banco = 'u451416913_g15';
+$usuario = 'u451416913_g15';
+$senha = 'Gp15@123';
 
 // Criando a conexão. PDO funciona com qualquer SGBD
 try {

@@ -105,7 +105,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){//SERVER faz o requisito para utilizar
 <body>
   <div class="form-container">
     <h2>Cadastro do Responsável</h2>
-    <form action="salvar_motorista.php" method="POST">
+    <form action="telainicialresponsavel.php" method="POST">
       <input type="text" name="nome" placeholder="Nome Completo" required>
       <input type="text" name="telefone" placeholder="Telefone" required>
       <input type="email" name="email" placeholder="Email" required>
