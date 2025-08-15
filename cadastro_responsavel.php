@@ -1,23 +1,24 @@
 <?php 
 include 'conexao.php';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){//SERVER faz o requisito para utilizar POST(formulário html). Os 3 iguais significam idêntico. 
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $senha = $_POST['senha'];
     
-  try {
-      $stmt = $pdo->prepare('INSERT INTO responsaveis (nome, email, telefone, senha) VALUES(?,?,?,?)');
-      $stmt->execute([$nome, $email, $telefone, $senha]);
-      header('Location: index.php');
-      exit(); // Sempre saia após um redirecionamento
-  } catch (PDOException $e) {
-      echo "Erro ao cadastrar: " . $e->getMessage();
-  }
-
-    header('Location: index.php');
+    try {
+        $stmt = $pdo->prepare('INSERT INTO responsaveis (nome, email, telefone, senha) VALUES(?,?,?,?)');
+        $stmt->execute([$nome, $email, $telefone, $senha]);
+        
+        // Redireciona para a tela inicial do responsável após cadastro
+        header('Location: telainicialresponsavel.php');
+        exit(); // Importante para parar a execução aqui
+    } catch (PDOException $e) {
+        echo "Erro ao cadastrar: " . $e->getMessage();
+    }
 }
+?>
 
 ?>
 <!DOCTYPE html>
