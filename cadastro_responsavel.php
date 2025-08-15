@@ -6,9 +6,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){//SERVER faz o requisito para utilizar
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $senha = $_POST['senha'];
-
-    $stmt = $pdo->prepare('INSERT INTO responsaveis (nome, email, telefone, senha) VALUES(?,?,?,?,?)');
-    $stmt->execute([$nome, $email, $telefone, $senha]);
+    
+  try {
+      $stmt = $pdo->prepare('INSERT INTO responsaveis (nome, email, telefone, senha) VALUES(?,?,?,?)');
+      $stmt->execute([$nome, $email, $telefone, $senha]);
+      header('Location: index.php');
+      exit(); // Sempre saia após um redirecionamento
+  } catch (PDOException $e) {
+      echo "Erro ao cadastrar: " . $e->getMessage();
+  }
 
     header('Location: index.php');
 }
@@ -105,7 +111,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){//SERVER faz o requisito para utilizar
 <body>
   <div class="form-container">
     <h2>Cadastro do Responsável</h2>
-    <form action="telainicialresponsavel.php" method="POST">
+    <form action="" method="POST">
       <input type="text" name="nome" placeholder="Nome Completo" required>
       <input type="text" name="telefone" placeholder="Telefone" required>
       <input type="email" name="email" placeholder="Email" required>
