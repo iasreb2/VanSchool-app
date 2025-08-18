@@ -1,9 +1,12 @@
 <?php
 // Inicia a sessão para manter o nome do usuário
 session_start();
-if (!isset($_SESSION['usuario_nome'])) {
-    $_SESSION['usuario_nome'] = 'Carlos';
+if (!isset($_SESSION['email'])) {
+    header('Location: login.php'); // Redireciona se não estiver logado
+    exit();
 }
+
+include 'includes/header.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -16,7 +19,7 @@ if (!isset($_SESSION['usuario_nome'])) {
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
+   
     
     <main class="container">
         <section class="welcome-section">
