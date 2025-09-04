@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="3;url=login.php">
+  <meta http-equiv="refresh" content="3;url=cadastro_escolha.php">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <title>Vanschool</title>

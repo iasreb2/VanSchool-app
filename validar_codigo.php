@@ -1,17 +1,24 @@
 <?php
 session_start();
-include 'includes/conexao.php';
 
-$codigo = $_POST['codigo'];
-$id = $_SESSION['usuario'];
+// Código fixo para demonstração
+$CODIGO_FIXO = "123456";
 
-$sql = $pdo->prepare("SELECT codigo_verificacao FROM usuarios WHERE id = ?");
-$sql->execute([$id]);
-$usuario = $sql->fetch();
-
-if ($usuario && $usuario['codigo_verificacao'] == $codigo) {
-    header("Location: dashboard.php");
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $codigo_digitado = $_POST['codigo'];
+    
+    if ($codigo_digitado === $CODIGO_FIXO) {
+        // Código válido - redireciona para o painel do responsável
+        header('Location: painel_responsavel.php');
+        exit();
+    } else {
+        // Código inválido
+        $_SESSION['erro_validacao'] = "Código inválido. Use 123456 para demonstração.";
+        header('Location: codigo_verificacao.php');
+        exit();
+    }
 } else {
-    echo "Código inválido.";
+    header('Location: codigo_verificacao.php');
+    exit();
 }
 ?>

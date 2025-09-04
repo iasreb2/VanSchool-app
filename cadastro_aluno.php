@@ -22,7 +22,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){//SERVER faz o requisito para utilizar
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -141,7 +140,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){//SERVER faz o requisito para utilizar
     Preencha as informações abaixo para cadastrar o aluno no app e vinculá-lo ao transporte escolar.
   </div>
 
-  <form class="form-box" action="salvar_aluno.php" method="POST" enctype="multipart/form-data">
+  <form class="form-box" action="telainicialresponsavel.php" method="POST" enctype="multipart/form-data">
     <input type="text" name="nome_aluno" placeholder="Nome Completo" required>
     <input type="date" name="data_nascimento" placeholder="Data de Nascimento" required>
 
@@ -160,7 +159,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){//SERVER faz o requisito para utilizar
   </form>
 
   <div class="btn-skip">
-    <a href="proxima_pagina.php">Pular Etapa</a>
+    <a href="telainicialresponsavel.php">Pular Etapa</a>
   </div>
 </body>
 </html>

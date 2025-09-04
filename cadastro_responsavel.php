@@ -1,18 +1,18 @@
 <?php 
-include 'conexao.php';
+include 'include/conexao.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usuario_nome = $_POST['usuario_nome'];
+    $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $senha = $_POST['senha'];
     
     try {
         $stmt = $pdo->prepare('INSERT INTO responsaveis (nome, email, telefone, senha) VALUES(?,?,?,?)');
-        $stmt->execute([$usuario_nome, $email, $telefone, $senha]);
+        $stmt->execute([$nome, $email, $telefone, $senha]);
         
         // Redireciona para a tela inicial do responsável após cadastro
-        header('Location: telainicialresponsavel.php');
+        header('Location: login_form.php');
         exit(); // Importante para parar a execução aqui
     } catch (PDOException $e) {
         echo "Erro ao cadastrar: " . $e->getMessage();
@@ -112,16 +112,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="form-container">
     <h2>Cadastro do Responsável</h2>
     <form action="" method="POST">
-      <input type="text" name="usuario_nome" placeholder="Nome Completo" required>
+      <input type="text" name="nome" placeholder="Nome Completo" required>
       <input type="text" name="telefone" placeholder="Telefone" required>
       <input type="email" name="email" placeholder="Email" required>
       <input type="password" name="senha" placeholder="Senha" required>
       <button type="submit">Cadastrar</button>
     </form>
 
-    <!-- Botão para redirecionar para cadastro de aluno -->
-    <button class="secondary-button" onclick="window.location.href='cadastro_aluno.php'">
-      Cadastrar Aluno
+    <button type="button" class="secondary-button" onclick="window.location.href='login_form.php'">
+     Fazer Login
     </button>
   </div>
 </body>

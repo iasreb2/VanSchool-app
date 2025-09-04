@@ -21,6 +21,20 @@ CREATE TABLE alunos (
     FOREIGN KEY (responsavel_id) REFERENCES responsaveis(id)
 );
 
+ALTER TABLE alunos RENAME COLUMN nome TO nome_aluno;
+
+ALTER TABLE alunos RENAME COLUMN ponto_embarque TO endereco_embarque;
+
+ALTER TABLE alunos RENAME COLUMN ponto_desembarque TO endereco_desembarque;
+
+ALTER TABLE alunos
+DROP COLUMN escola
+
+ALTER TABLE alunos 
+ADD COLUMN observacoes VARCHAR(550)
+
+ALTER TABLE alunos 
+ADD COLUMN telefone_emergencia VARCHAR(30) AFTER endereco_desembarque ;
 -- Tabela de Motoristas
 CREATE TABLE motoristas (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -82,4 +96,17 @@ CREATE TABLE notificacoes (
     tipo ENUM('pagamento', 'comunicado', 'sistema'),
     data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
     visualizado BOOLEAN DEFAULT FALSE
+);
+
+
+CREATE TABLE codigos_verificacao (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(6) NOT NULL,
+    motorista_id INT NOT NULL,
+    responsavel_id INT,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    data_utilizacao TIMESTAMP NULL,
+    expirado TINYINT(1) DEFAULT 0,
+    FOREIGN KEY (motorista_id) REFERENCES motoristas(id),
+    FOREIGN KEY (responsavel_id) REFERENCES responsaveis(id)
 );
